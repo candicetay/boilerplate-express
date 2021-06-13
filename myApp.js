@@ -31,18 +31,17 @@ console.log(path.dirname(require.main.filename));
 
 // Implement a Root-Level Request Logger Middleware
 // for all paths
-app.use(function (req, res, next) {
-  console.log(req.method, req.path, "-", req.ip);
-  next();
-});
+// app.use(function (req, res, next) {
+//   console.log(req.method, req.path, "-", req.ip);
+//   next();
+// });
 
 //Chain middleware to create a time server
 app.get(
   "/now",
   function (req, res, next) {
-    var today = new Date();
-    var time_string = today.toString();
-    req.time = time_string;
+    var today = new Date().toString();
+    req.time = today;
     next();
   },
   function (req, res) {
@@ -53,6 +52,12 @@ app.get(
 // Get Route Parameter Input from the Client
 app.get("/:word/echo", function (req, res) {
   res.send({ echo: req.params.word });
+});
+
+// Get Query Parameter Input from the Client
+app.route("/name").get(function (req, res) {
+  var namestring = req.query.first + " " + req.query.last;
+  res.send({ name: namestring });
 });
 
 module.exports = app;
