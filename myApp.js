@@ -1,6 +1,9 @@
 const dotenv = require("dotenv").config();
 //necessary to obtain env variable
 
+// for auto reloading app when code changes
+//use reload library
+
 const e = require("express");
 var express = require("express");
 var path = require("path");
@@ -46,4 +49,10 @@ app.get(
     res.send({ time: req.time });
   }
 );
+
+// Get Route Parameter Input from the Client
+app.get("/:word/echo", function (req, res) {
+  res.send({ echo: req.params.word });
+});
+
 module.exports = app;
