@@ -42,7 +42,7 @@ app.get(
     req.time = time_string;
     next();
   },
-  function (req, res) {
+  (req, res) {
     res.send(req.time);
   }
 );
