@@ -1,4 +1,6 @@
 const dotenv = require("dotenv").config();
+//necessary to obtain env variable
+
 const e = require("express");
 var express = require("express");
 var path = require("path");
