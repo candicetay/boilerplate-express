@@ -38,12 +38,13 @@ app.get(
   "/now",
   function (req, res, next) {
     var today = new Date();
-    var time_string = today.toDateString();
+    var time_string = today.toString();
     req.time = time_string;
     next();
   },
   (req, res) {
-    res.send(req.time);
+    res.send({time: req.time}
+      );
   }
 );
 module.exports = app;
