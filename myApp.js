@@ -32,4 +32,18 @@ app.use(function (req, res, next) {
   console.log(req.method, req.path, "-", req.ip);
   next();
 });
+
+//Chain middleware to create a time server
+app.get(
+  "/now",
+  function (req, res, next) {
+    var today = new Date();
+    var time_string = today.toDateString();
+    req.time = time_string;
+    next();
+  },
+  function (req, res) {
+    res.send(req.time);
+  }
+);
 module.exports = app;
