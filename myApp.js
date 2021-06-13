@@ -42,9 +42,8 @@ app.get(
     req.time = time_string;
     next();
   },
-  (req, res) {
-    res.send({time: req.time}
-      );
+  function (req, res) {
+    res.send({ time: req.time });
   }
 );
 module.exports = app;
