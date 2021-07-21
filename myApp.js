@@ -1,3 +1,4 @@
+var bodyParser = require("body-parser");
 const dotenv = require("dotenv").config();
 //necessary to obtain env variable
 
@@ -11,9 +12,9 @@ var app = express();
 
 // Serve an HTML file
 app.get("/", function (req, res) {
-  //   res.send("Hello Express");
-  absolutePath = __dirname + "/views/index.html";
-  res.sendFile(absolutePath);
+	//   res.send("Hello Express");
+	absolutePath = __dirname + "/views/index.html";
+	res.sendFile(absolutePath);
 });
 
 // Serve static assets
@@ -38,26 +39,29 @@ console.log(path.dirname(require.main.filename));
 
 //Chain middleware to create a time server
 app.get(
-  "/now",
-  function (req, res, next) {
-    var today = new Date().toString();
-    req.time = today;
-    next();
-  },
-  function (req, res) {
-    res.send({ time: req.time });
-  }
+	"/now",
+	function (req, res, next) {
+		var today = new Date().toString();
+		req.time = today;
+		next();
+	},
+	function (req, res) {
+		res.send({ time: req.time });
+	}
 );
 
 // Get Route Parameter Input from the Client
 app.get("/:word/echo", function (req, res) {
-  res.send({ echo: req.params.word });
+	res.send({ echo: req.params.word });
 });
 
 // Get Query Parameter Input from the Client
 app.route("/name").get(function (req, res) {
-  var namestring = req.query.first + " " + req.query.last;
-  res.send({ name: namestring });
+	var namestring = req.query.first + " " + req.query.last;
+	res.send({ name: namestring });
 });
+
+//Body parser to parse post request on all requests
+app.use(bodyParser.urlencoded({ extended: false }));
 
 module.exports = app;
