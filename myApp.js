@@ -62,6 +62,7 @@ app.route("/name").get(function (req, res) {
 });
 
 //Body parser to parse post request on all requests
+//Body parser deprecated
 app.use(bodyParser.urlencoded({ extended: false }));
 
 module.exports = app;
