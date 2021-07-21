@@ -65,4 +65,14 @@ app.route("/name").get(function (req, res) {
 //Body parser deprecated;
 app.use(bodyParser.urlencoded({ extended: false }));
 
+//get data from POST Requests
+app.post(
+	"/name",
+	bodyParser.urlencoded({ extended: false }),
+	function (req, res) {
+		var namestring = req.body.first + " " + req.body.last;
+		res.send({ name: namestring });
+	}
+);
+
 module.exports = app;
